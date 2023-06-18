@@ -1,16 +1,10 @@
 /**
- * Keyboard to display hiragana characters
+ * Keyboard component to display hiragana characters 
  */
 import HIRAGANA from "../constants/hiragana";
 import "./keyboard-container.css";
 
 function Keyboard({ handleButtonPush }) {
-
-
-    //sends the hiragana or valued letter . 
-
-
-
 
 
 

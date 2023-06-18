@@ -51,7 +51,7 @@ function App() {
   }
 
 
-  //game is done will toggle what component to show to player.
+  //GameIsDone boolean will toggle which component to show to player.
   return (
     <>
 
