@@ -60,25 +60,31 @@ function App() {
   return (
     <>
 
+
       <h1>Katakana Quiz</h1>
 
-      {!GameIsDone && <>
-        <QuizCards updateGameState={updateGameState} handleAnswer={handleAnswer} />
+      <div id="main-container" className="scrollable-content">
+
+        {!GameIsDone && <>
+          <QuizCards updateGameState={updateGameState} handleAnswer={handleAnswer} />
 
 
-        <p>Enter the hiragana character that sounds like the katakana! <br />
-          Questions answered: {progressCount} / {answer_sheet.size}</p>
+          <p>Enter the hiragana character that sounds like the katakana! <br />
+            Questions answered: {progressCount} / {answer_sheet.size}</p>
 
-      </>
+        </>
 
 
-      }
+        }
 
-      {GameIsDone && <>
+        {GameIsDone && <>
 
-        <QuizResults playerAnswers={playerAnswers} />
+          <QuizResults playerAnswers={playerAnswers} />
 
-      </>}
+        </>}
+
+
+      </div>
 
     </>
   );

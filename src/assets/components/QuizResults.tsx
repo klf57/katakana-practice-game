@@ -6,12 +6,11 @@
 function QuizResults({ playerAnswers }) {
 
 
-    console.log("hi");
-    console.log(playerAnswers)
-
 
     return (
         <>
+
+
 
             {Array.from(playerAnswers.entries()).map(([key, value]) =>
                 <>
@@ -24,12 +23,9 @@ function QuizResults({ playerAnswers }) {
                 </>
 
 
-
-
-
-
-
             )}
+
+
 
         </>
     )
