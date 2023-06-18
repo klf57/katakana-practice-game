@@ -7,7 +7,7 @@ interface Props {
   handleAnswer;
 }
 
-function QuizCards({ updateGameState, handleAnswer }: Props) {
+function QuizCards({ handleAnswer }: Props) {
 
 
   //makes an array
@@ -35,30 +35,8 @@ function QuizCards({ updateGameState, handleAnswer }: Props) {
       setIndex(current_index + 1);
     }
 
-
-    if (current_index > something.length) {
-      //tells the parent Component that all the questions have been answered.
-      updateGameState();
-    }
   };
-  //this way doesn't  work. however how about trying to put hiragana into a list and then,
-  //map(index, value) <li key={HIRAGANA.charAt(i).toString()}
 
-  //tried using a dictionary, however forEach((key, value, map) => {does not work})
-  //assign a key index so it can be found again.
-
-  /**
-   *       {something.map((item, index) => (
-        //for each letter in array, there will be a thingy.
-        <div className="card" key={index}>
-          <div className="card-body">
-            <h1>{item} </h1>
-            <input type="text" />
-          </div>
-        </div>
-        
-      ))}
-   */
 
   return (
     <>

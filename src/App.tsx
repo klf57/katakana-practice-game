@@ -3,6 +3,7 @@ import "./App.css";
 import QuizCards from "./assets/components/QuizCards";
 import HIRAGANA from "./assets/constants/hiragana";
 import KATAKANA from "./assets/constants/katakana";
+import QuizResults from "./assets/components/QuizResults";
 
 function App() {
   //toggles between different components.
@@ -10,6 +11,8 @@ function App() {
 
   let [playerAnswers, addAnswer] = useState(new Map());
   const [progressCount, setCount] = useState(0);
+
+  let is_correct = true;
 
   //toggles from false to true or vice versa.
   const updateGameState = () => {
@@ -28,27 +31,54 @@ function App() {
     );
   }
 
-
-  //process the player's answer
+  /**
+   * Processes the player's answer and checks if it is correct. Also increments the progress Counter by +1 
+   * @param current_question the question currently shown to the player
+   * @param response The answer the player entered 
+   */
   const handleAnswer = (current_question: String, response: String) => {
 
     // if player did not put anything in, it will evaluate as false.
-    let is_correct = answer_sheet.get(current_question) === response;
+    is_correct = answer_sheet.get(current_question) === response ? true : false;
 
     addAnswer(playerAnswers.set(current_question, is_correct));
-    console.log(playerAnswers);
+    setCount(progressCount + 1);
+    console.log(playerAnswers); //FOR TESTING
+
+    //checks if all questions have been answered 
+    if (progressCount == answer_sheet.size - 1) {
+
+      updateGameState();
+
+    }
+
 
   }
 
 
-
+  //game is done will toggle what component to show to player.
   return (
     <>
-      <h1>Katakana Quiz</h1>
-      <QuizCards updateGameState={updateGameState} handleAnswer={handleAnswer} />
 
-      <p>Enter the hiragana character that sounds like the katakana! </p>
-      <p>Questions answered: {progressCount} / {KATAKANA.length}</p>
+      <h1>Katakana Quiz</h1>
+
+      {!GameIsDone && <>
+        <QuizCards updateGameState={updateGameState} handleAnswer={handleAnswer} />
+
+
+        <p>Enter the hiragana character that sounds like the katakana! <br />
+          Questions answered: {progressCount} / {answer_sheet.size}</p>
+
+      </>
+
+
+      }
+
+      {GameIsDone && <>
+
+        <QuizResults playerAnswers={playerAnswers} />
+
+      </>}
 
     </>
   );
