@@ -4,7 +4,7 @@
 import HIRAGANA from "../constants/hiragana";
 import "./keyboard-container.css";
 
-function Keyboard() {
+function Keyboard({ handleButtonPush }) {
 
 
     //sends the hiragana or valued letter . 
@@ -18,9 +18,9 @@ function Keyboard() {
         <>
             <div id="keyboard-container" className="btn-group btn-group-sm" role="group" aria-label="Small button group">
 
-                {HIRAGANA.split("").map((value) => (
+                {HIRAGANA.split("").map((letter) => (
 
-                    <button type="button" className="btn btn-outline-primary" value={value}>{value}</button>
+                    <button type="button" className="btn btn-outline-primary" key={letter} onClick={() => handleButtonPush(letter)}>{letter}</button>
 
                 ))}
 

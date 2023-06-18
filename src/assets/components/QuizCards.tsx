@@ -52,6 +52,9 @@ function QuizCards({ handleAnswer, updateGameState }: Props) {
   const next_question = (current_answer: String) => {
 
 
+    console.log(current_answer);
+
+
     //tells the parent component that the player has given an answer to a question.
     current_question = katakana_list[progressCount];
     handleAnswer(current_question, current_answer);
@@ -95,7 +98,7 @@ function QuizCards({ handleAnswer, updateGameState }: Props) {
 
       <p>Enter the hiragana character that sounds like the katakana! type it in or use the keyboard <br />
         Questions answered: {progressCount} / {katakana_list.length}</p>
-      <Keyboard />
+      <Keyboard handleButtonPush={next_question} />
     </>
   );
 }
