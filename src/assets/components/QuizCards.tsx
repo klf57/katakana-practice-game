@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Keyboard from "./Keyboard";
 import KATAKANA from "../constants/katakana";
 
 interface Props {
@@ -7,14 +8,14 @@ interface Props {
   handleAnswer;
 }
 
-function QuizCards({ handleAnswer }: Props) {
+function QuizCards({ handleAnswer, updateGameState }: Props) {
 
 
   //makes an array
   let something = KATAKANA.split("");
 
   //variables for making questions appear one at a time.
-  let [current_index, setIndex] = useState(0);
+  let [progressCount, setProgress] = useState(0);
 
 
 
@@ -24,7 +25,7 @@ function QuizCards({ handleAnswer }: Props) {
 
     if (event.key === "Enter") {
 
-      let current_question = something[current_index];
+      let current_question = something[progressCount];
 
       //tells the parent component that the player has given an answer to a question.
       handleAnswer(current_question, document.getElementById("userAnswer").value);
@@ -32,7 +33,14 @@ function QuizCards({ handleAnswer }: Props) {
       //have to manually tell input-tag to clear out user's entered password.
       document.getElementById("userAnswer").value = "";
 
-      setIndex(current_index + 1);
+      setProgress(progressCount + 1);
+
+      //checks if all questions have been answered 
+      if (progressCount == something.length - 1) {
+
+        updateGameState();
+
+      }
     }
 
   };
@@ -42,7 +50,7 @@ function QuizCards({ handleAnswer }: Props) {
     <>
       <div className="card ">
         <div className="card-body">
-          <h1> {something[current_index]}</h1>
+          <h1> {something[progressCount]}</h1>
 
           <form
             onKeyDown={
@@ -56,8 +64,14 @@ function QuizCards({ handleAnswer }: Props) {
           >
             <input type="text" id="userAnswer" />
           </form>
+
+
         </div>
       </div>
+
+      <p>Enter the hiragana character that sounds like the katakana! type it in or use the keyboard <br />
+        Questions answered: {progressCount} / {something.length}</p>
+      <Keyboard />
     </>
   );
 }

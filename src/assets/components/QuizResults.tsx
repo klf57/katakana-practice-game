@@ -10,6 +10,8 @@ function QuizResults({ playerAnswers }) {
     return (
         <>
 
+            <h2>Results</h2>
+
 
 
             {Array.from(playerAnswers.entries()).map(([key, value]) =>

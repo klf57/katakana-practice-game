@@ -5,6 +5,7 @@ import HIRAGANA from "./assets/constants/hiragana";
 import KATAKANA from "./assets/constants/katakana";
 import QuizResults from "./assets/components/QuizResults";
 
+
 function App() {
   //toggles between different components.
   let [GameIsDone, setEndGame] = useState(false);
@@ -45,12 +46,6 @@ function App() {
     setCount(progressCount + 1);
     console.log(playerAnswers); //FOR TESTING
 
-    //checks if all questions have been answered 
-    if (progressCount == answer_sheet.size - 1) {
-
-      updateGameState();
-
-    }
 
 
   }
@@ -69,8 +64,6 @@ function App() {
           <QuizCards updateGameState={updateGameState} handleAnswer={handleAnswer} />
 
 
-          <p>Enter the hiragana character that sounds like the katakana! <br />
-            Questions answered: {progressCount} / {answer_sheet.size}</p>
 
         </>
 
