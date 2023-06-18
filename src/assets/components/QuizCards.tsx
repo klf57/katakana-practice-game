@@ -62,7 +62,7 @@ function QuizCards({ updateGameState, handleAnswer }: Props) {
 
   return (
     <>
-      <div className="card">
+      <div className="card ">
         <div className="card-body">
           <h1> {something[current_index]}</h1>
 

@@ -9,6 +9,7 @@ function App() {
   let [GameIsDone, setEndGame] = useState(false);
 
   let [playerAnswers, addAnswer] = useState(new Map());
+  const [progressCount, setCount] = useState(0);
 
   //toggles from false to true or vice versa.
   const updateGameState = () => {
@@ -43,8 +44,12 @@ function App() {
 
   return (
     <>
-      <header> <h1>Katakana Quiz</h1></header>
+      <h1>Katakana Quiz</h1>
       <QuizCards updateGameState={updateGameState} handleAnswer={handleAnswer} />
+
+      <p>Enter the hiragana character that sounds like the katakana! </p>
+      <p>Questions answered: {progressCount} / {KATAKANA.length}</p>
+
     </>
   );
 }
