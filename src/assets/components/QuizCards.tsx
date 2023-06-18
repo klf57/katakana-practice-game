@@ -12,53 +12,77 @@ function QuizCards({ handleAnswer, updateGameState }: Props) {
 
 
   //makes an array
-  let something = KATAKANA.split("");
+  let katakana_list = KATAKANA.split("");
 
   //variables for making questions appear one at a time.
   let [progressCount, setProgress] = useState(0);
 
+  let current_question = '';
 
 
-  const next_question = (event) => {
+
+  const handle_input = (event) => {
     //stops component triggering refresh whenever enter key is pressed.
     event.preventDefault();
 
     if (event.key === "Enter") {
 
-      let current_question = something[progressCount];
 
-      //tells the parent component that the player has given an answer to a question.
-      handleAnswer(current_question, document.getElementById("userAnswer").value);
 
-      //have to manually tell input-tag to clear out user's entered password.
-      document.getElementById("userAnswer").value = "";
+      next_question(document.getElementById("userAnswer").value);
 
-      setProgress(progressCount + 1);
 
-      //checks if all questions have been answered 
-      if (progressCount == something.length - 1) {
 
-        updateGameState();
 
-      }
     }
 
   };
+
+
+  const handle_button_pushed = () => {
+    console.log('button pushed.');
+
+    current_question = "katakana_list ";
+  }
+
+
+  /*
+  PREPARES NEXT QUESTION
+  */
+  const next_question = (current_answer: String) => {
+
+
+    //tells the parent component that the player has given an answer to a question.
+    current_question = katakana_list[progressCount];
+    handleAnswer(current_question, current_answer);
+
+    //have to manually tell input-tag to clear out user's entered password.
+    document.getElementById("userAnswer").value = "";
+
+    setProgress(progressCount + 1);
+
+    //checks if all questions have been answered 
+    if (progressCount == katakana_list.length - 1) {
+
+      updateGameState();
+
+    }
+  }
 
 
   return (
     <>
       <div className="card ">
         <div className="card-body">
-          <h1> {something[progressCount]}</h1>
+          <h1> {katakana_list[progressCount]}</h1>
 
           <form
             onKeyDown={
               //need to place onKeyDown in a form tag. Enter key isn't detected inside the input tag.
-              //if its just next_question() nothing appears in the input box
+              //if its just handle_input() nothing appears in the input box
               (event) =>
                 event.key === "Enter"
-                  ? next_question(event)
+                  ? handle_input(event)
                   : console.log("not triggered")
             }
           >
@@ -70,7 +94,7 @@ function QuizCards({ handleAnswer, updateGameState }: Props) {
       </div>
 
       <p>Enter the hiragana character that sounds like the katakana! type it in or use the keyboard <br />
-        Questions answered: {progressCount} / {something.length}</p>
+        Questions answered: {progressCount} / {katakana_list.length}</p>
       <Keyboard />
     </>
   );
