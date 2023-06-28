@@ -8,6 +8,10 @@ function QuizResults({ playerAnswers }) {
 
 
 
+
+
+
+
     return (
         <>
 
@@ -15,9 +19,9 @@ function QuizResults({ playerAnswers }) {
 
 
 
-            {Array.from(playerAnswers.entries()).map(([key, value]) =>
+            {Array.from(playerAnswers.entries()).map(([key, was_correct]) =>
                 <>
-                    {value ? <div className="card text-white bg-success mb-3 " key={key} >
+                    {was_correct ? <div className="card text-white bg-success mb-3 " key={key} >
                         <div className="card-body">
                             <h1> {key}</h1>
                             <p>correct</p>
@@ -36,6 +40,11 @@ function QuizResults({ playerAnswers }) {
 
 
             )}
+
+
+
+            <button type="button" className="btn btn-primary btn-lg btn-block" onClick={() => window.location.reload(false)}>Restart Quiz</button>
+
 
 
 
